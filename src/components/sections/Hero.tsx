@@ -19,14 +19,12 @@ export function Hero() {
     }
     let cancelled = false;
     const fonts = document.fonts ? document.fonts.ready : Promise.resolve();
-    Promise.race([fonts, new Promise((r) => setTimeout(r, 700))]).then(() => {
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => {
-          if (cancelled) return;
-          setGo(true);
-          document.dispatchEvent(new Event(HERO_GO_EVENT));
-        }),
-      );
+    Promise.race([fonts, new Promise((r) => setTimeout(r, 360))]).then(() => {
+      requestAnimationFrame(() => {
+        if (cancelled) return;
+        setGo(true);
+        document.dispatchEvent(new Event(HERO_GO_EVENT));
+      });
     });
     return () => {
       cancelled = true;
@@ -34,7 +32,7 @@ export function Hero() {
   }, []);
 
   return (
-    <header className={`hero layer${go ? "go" : ""}`} id="top">
+    <header className={`hero layer${go ? " go" : ""}`} id="top">
       <div className="wrap">
         <div className="hero-copy">
           <div className="titles">

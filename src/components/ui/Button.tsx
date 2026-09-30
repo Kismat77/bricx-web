@@ -12,7 +12,7 @@ type Props = {
   style?: CSSProperties;
 };
 
-/** Brand button: green primary or light ghost. Magnetic toward the pointer on desktop. */
+/** Brand button: green primary or light ghost. Widens on hover (styles: .btn in base.css). */
 export function Button({ href, children, variant = "primary", size = "lg", reveal, delay, style }: Props) {
   return (
     <Reveal
@@ -21,7 +21,6 @@ export function Button({ href, children, variant = "primary", size = "lg", revea
       className={`btn btn-${variant} btn-${size}`}
       variant={reveal}
       delay={delay}
-      magnetic
       style={style}
     >
       {children}

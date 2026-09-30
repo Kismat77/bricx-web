@@ -1,4 +1,5 @@
-/* ≥1280px: every section is locked to the Figma frame (1440 × 5656) so the page line runs exactly where it was drawn.
+/* ≥1280px: every section down to the Core is locked to the Figma frame (1440px wide) so the page line runs exactly where it was drawn;
+   the closing band is one viewport tall and the rope's tail there is built from its measured box (rope-engine `end`).
    If you change a section height here, re-check the line route in src/components/line/. */
 @media (min-width:1280px){
   .wrap{width:1200px}
@@ -29,8 +30,7 @@
   .mods{margin:0;display:block}
   .mod{position:absolute;left:var(--x);top:var(--y);width:221px;height:200px}
   .photo-card{position:absolute;left:570px;top:322px;width:300px;height:424px}
-  .closing{margin-top:158px;height:219px}
-  footer{margin-top:160px;height:565px;padding:120px 0 32px;border-radius:56px 56px 0 0}
+  footer{height:565px;padding:120px 0 32px;border-radius:56px 56px 0 0}
   footer .cols{flex-wrap:nowrap;gap:0}
   footer .about,footer .links3{flex:0 0 600px}
   footer .links3{flex-wrap:nowrap}
