@@ -1,0 +1,104 @@
+/* Motion: hero reveal, scroll-in presets, text effects, card effects, scroll scale.
+   Everything that hides content is scoped to html.anim (set in app/layout.tsx only when motion is allowed). */
+/* hero text: line-by-line masked reveal (after indisea.com) */
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.hero h1 .w > span{display:inline-block}
+.hero h1 .w > span{transform-origin:0 100%}
+.js-hero .hero h1 .w > span{transform:translateY(112%) rotate(6deg)}
+.js-hero .hero .eyebrow[data-te]{opacity:1;transform:none}
+.js-hero .hero .eyebrow,.js-hero .hero .cta-row{opacity:0;transform:translateY(14px)}
+.hero h1 .w > span,.hero .eyebrow,.hero .cta-row{transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity 1s cubic-bezier(.16,1,.3,1)}
+.js-hero .hero.go h1 .w > span,.hero-done .hero h1 .w > span{transform:none}
+.js-hero .hero.go .eyebrow,.js-hero .hero.go .cta-row,.hero-done .hero .eyebrow,.hero-done .hero .cta-row{opacity:1;transform:none}
+.hero.go .cta-row{transition-delay:1.05s}
+@media (prefers-reduced-motion:reduce){ .js-hero .hero h1 .w > span,.js-hero .hero .eyebrow,.js-hero .hero .cta-row{transform:none;opacity:1;transition:none} }
+/* ---------- scroll-in motion (motion-primitives presets, vanilla) ---------- */
+html.anim [data-reveal]{opacity:0;filter:blur(4px);translate:0 20px;transition:opacity .7s var(--ease),filter .7s var(--ease),translate .7s var(--ease),scale .7s var(--ease);transition-delay:var(--d,0s)}
+html.anim [data-reveal="fade-blur"]{filter:blur(12px);translate:0 12px}
+html.anim [data-reveal="slide"]{filter:none;translate:0 16px}
+html.anim [data-reveal="zoom"]{filter:blur(6px);translate:0 14px;scale:.9;transition:opacity .8s var(--ease),filter .8s var(--ease),translate .8s var(--spring),scale .8s var(--spring);transition-delay:var(--d,0s)}
+html.anim [data-reveal="pop"]{filter:none;translate:none;scale:.4;transition:opacity .35s ease,scale .7s var(--spring);transition-delay:var(--d,0s)}
+html.anim [data-reveal="note"]{filter:none;translate:none;scale:.7;transition:opacity .4s ease,scale .6s var(--spring);transition-delay:var(--d,0s)}
+html.anim [data-reveal="rise"]{filter:blur(8px);translate:0 60px;transition-duration:1.2s}
+html.anim [data-reveal].in{opacity:1;filter:none;translate:none;scale:none}
+[data-photo] img{transition:scale 1.6s var(--ease)}
+html.anim [data-photo]:not(.in) img{scale:1.08}
+/* TextEffect: per word / per letter */
+html.anim [data-te] .tw{display:inline-block;opacity:0;filter:blur(12px);translate:0 20px;transition:opacity .5s var(--ease),filter .5s var(--ease),translate .5s var(--ease);transition-delay:calc(var(--d,0s) + var(--i) * .05s)}
+html.anim [data-te="char"] .tw{filter:none;translate:0 6px;transition-duration:.35s;transition-delay:calc(var(--d,0s) + var(--i) * .03s)}
+html.anim [data-te].in .tw{opacity:1;filter:none;translate:none}
+/* Tilt + Spotlight */
+[data-tilt]::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(43,224,128,.18),transparent 70%);opacity:0;transition:opacity .3s ease}
+[data-tilt]:hover::after{opacity:1}
+/* Magnetic buttons */
+.btn{transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease,translate .6s var(--ease)}
+/* BorderTrail on the job card */
+
+.job::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--beam),transparent 0 72%,rgba(43,224,128,0) 74%,#2BE080 88%,rgba(43,224,128,0) 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:beam 5s linear infinite;pointer-events:none;z-index:3}
+@keyframes beam{to{--beam:360deg}}
+/* TextShimmer on the closing kicker */
+.closing .kick{background:linear-gradient(90deg,#1FBD69 0%,#1FBD69 38%,#A8F2CB 50%,#1FBD69 62%,#1FBD69 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 2.6s linear infinite}
+@keyframes shimmer{from{background-position:100% 0}to{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){ .job::before,.closing .kick{animation:none} html{scroll-behavior:auto} .live i{animation:none} .btn,.mod{transition:none} }
+
+/* ---------- Yuchat-style cards + type ---------- */
+
+/* headings: navy-to-green gradient fill, washed in after the lines rise */
+.h2{position:relative;--g0:#03314B;--g1:#0B6B4E;--g2:#1FBD69}
+.h2.grad .tw{display:inline-block;background-image:linear-gradient(135deg,var(--g0) 0%,var(--g0) calc(100% - var(--wash)),var(--g1) calc(100% - var(--wash) * .45),var(--g2) 100%);background-size:var(--gw,100%) var(--gh,100%);background-position:calc(var(--gx,0px) * -1) calc(var(--gy,0px) * -1);background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.h2.grad .tw.hl2{--g0:#0B6B4E;--g1:#19AD62;--g2:#12934F}
+html.anim .h2.grad{transition:--wash 1.8s cubic-bezier(.65,0,.35,1) calc(var(--d,0s) + .45s)}
+html.anim .h2.grad:not(.in){--wash:0%}
+/* headings rise line by line */
+html.anim [data-te="line"] .tw{filter:none;translate:0 24px;transition:opacity .8s var(--out),translate 1s var(--out);transition-delay:calc(var(--d,0s) + var(--i) * .12s)}
+/* eyebrows type out with a caret */
+html.anim .eyebrow[data-te="char"]{position:relative}
+html.anim .eyebrow[data-te="char"] .tw{translate:none;transition:opacity .05s linear;transition-delay:calc(var(--d,0s) + .15s + var(--i) * .045s)}
+.caret{display:none}
+html.anim .eyebrow .caret{display:block;position:absolute;left:0;top:.1em;width:2px;height:1em;border-radius:1px;background:currentColor;opacity:0;pointer-events:none}
+html.anim .eyebrow.in .caret{opacity:1;translate:calc(var(--n) * 1ch) 0;transition:translate calc(var(--n) * .045s) steps(var(--n),jump-start) calc(var(--d,0s) + .15s);animation:caret 1s step-end calc(var(--d,0s) + .15s + var(--n) * .045s) 3 forwards}
+@keyframes caret{0%,60%{opacity:1}61%,100%{opacity:0}}
+/* thin glow rule under the Core heading */
+.core .head::after{content:"";position:absolute;left:50%;bottom:-28px;width:220px;height:1px;margin-left:-110px;background:radial-gradient(ellipse at center,rgba(31,189,105,.8) 0%,rgba(31,189,105,0) 70%);transition:scale 1.4s var(--out) .7s}
+html.anim .core .head:not(:has(.h2.in))::after{scale:0 1}
+@media (max-width:1279px){ .core .head{position:relative} }
+/* cards rise, then their contents follow */
+html.anim [data-reveal="card"]{filter:none;translate:0 64px;transition:opacity 1s var(--out),translate 1.2s var(--out),border-color .3s ease,box-shadow .3s ease,background .3s ease;transition-delay:var(--d,0s),var(--d,0s),0s,0s,0s}
+html.anim .kid{opacity:0;translate:0 14px;transition:opacity .6s var(--out),translate .8s var(--out);transition-delay:calc(var(--d,0s) + .22s + var(--k) * .06s)}
+html.anim .in .kid{opacity:1;translate:none}
+/* metric cards: their own colour glows from the top on hover; icons draw in */
+.metric{transition:border-color .3s ease,box-shadow .3s ease}
+.metric .value,.metric > div{position:relative}
+.metric::before{content:"";position:absolute;inset:0 0 auto;height:150px;background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--c) 22%,transparent) 0%,transparent 70%);opacity:0;transition:opacity .5s ease;pointer-events:none}
+.metric:hover::before{opacity:1}
+.metric:hover{border-color:color-mix(in srgb,var(--c) 45%,transparent);box-shadow:0 14px 34px color-mix(in srgb,var(--c) 16%,transparent),0 0 0 1px color-mix(in srgb,var(--c) 14%,transparent)}
+.metric[data-tilt]::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 14%,transparent),transparent 70%)}
+html.anim .metric .art path{stroke-dasharray:1 2;stroke-dashoffset:1.02;transition:stroke-dashoffset 1.8s cubic-bezier(.65,0,.35,1);transition-delay:calc(var(--d,0s) + .5s)}
+html.anim .metric.in .art path{stroke-dashoffset:0}
+/* glass shine: once as a card lands; in The Core a wave passes outward every few seconds */
+.shine{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;z-index:2}
+.shine::before{content:"";position:absolute;top:-10%;bottom:-10%;left:0;width:42%;background:linear-gradient(100deg,rgba(255,255,255,0) 10%,rgba(255,255,255,.75) 48%,rgba(205,250,226,.5) 56%,rgba(255,255,255,0) 90%);filter:blur(2px);transform:translateX(-130%) skewX(-14deg)}
+html.anim .in [data-shine="once"] > .shine::before,html.anim [data-shine="once"].in > .shine::before{animation:sweep 1.5s cubic-bezier(.45,0,.25,1) calc(var(--d,0s) + .6s) both}
+html.anim .mods.loop [data-shine="loop"] > .shine::before{animation:sweepLoop 7s cubic-bezier(.45,0,.25,1) calc(var(--d,0s) * 2) infinite}
+@keyframes sweep{to{transform:translateX(330%) skewX(-14deg)}}
+@keyframes sweepLoop{0%{transform:translateX(-130%) skewX(-14deg)}18%,100%{transform:translateX(330%) skewX(-14deg)}}
+/* job card: light runs along the bars, LIVE pings */
+.bar b,.line .t b{position:relative;overflow:hidden}
+.bar b::after,.line .t b::after{content:"";position:absolute;top:0;bottom:0;left:-48px;width:48px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.95),rgba(255,255,255,0));animation:flow 2.8s cubic-bezier(.45,0,.55,1) 1.4s infinite}
+.line:nth-child(2) .t b::after{animation-delay:1.75s}
+.line:nth-child(3) .t b::after{animation-delay:2.1s}
+@keyframes flow{0%{left:-48px}65%,100%{left:100%}}
+.live i{position:relative;animation:none}
+.live i::after{content:"";position:absolute;inset:0;border-radius:50%;background:#3DD68C;animation:ping 1.6s cubic-bezier(0,0,.2,1) infinite}
+@keyframes ping{75%,100%{transform:scale(2.6);opacity:0}}
+/* accordion rule draws across when an industry opens */
+.acc hr{background:linear-gradient(var(--success),var(--success)) 0 0/0% 100% no-repeat var(--line-2);transition:background-size .8s var(--out)}
+.acc hr.on{background-size:100% 100%}
+@media (prefers-reduced-motion:reduce){ .shine,.bar b::after,.line .t b::after,.live i::after{display:none} .acc hr,.h2.grad{transition:none} }
+/* ---------- scroll scale on images: the frame grows to full size while the photo settles from a slight zoom ---------- */
+html.anim [data-reveal="fade"]{filter:none;translate:none;transition:opacity 1s var(--out);transition-delay:var(--d,0s)}
+[data-scale]{transform:scale(calc(var(--s0,1) + (1 - var(--s0,1)) * var(--sp,1)))}
+[data-scale] > img,[data-scale] > .shot-in{scale:calc(var(--z0,1) - (var(--z0,1) - 1) * var(--sp,1))}
+.photo-card > img{transform-origin:50% 100%}
+html.anim [data-reveal="fade-up"]{filter:none;translate:0 90px;transition:opacity .9s ease-out,translate 1.1s var(--out),border-color .3s ease,box-shadow .3s ease;transition-delay:var(--d,0s),var(--d,0s),0s,0s}
+#cta-t{--g0:#03314B;--g1:#0A3D3A;--g2:#0C311D}   /* dark ink: the rope underlines this line */

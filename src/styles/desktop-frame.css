@@ -1,0 +1,41 @@
+/* ≥1280px: every section is locked to the Figma frame (1440 × 5656) so the page line runs exactly where it was drawn.
+   If you change a section height here, re-check the line route in src/components/line/. */
+@media (min-width:1280px){
+  .wrap{width:1200px}
+  .hero{height:735px}
+  .hero .wrap{padding-block:56px 0}
+  .hero-copy{width:848px}
+  .hero h1{font-size:96px}
+  .problem .head{height:212px;flex-wrap:nowrap;gap:0}
+  .problem .head .titles{width:636px;max-width:none}   /* Figma box is 626; +10 keeps its exact line breaks with the web font */
+  .problem .head .body{width:474px}
+  .h2{font-size:49px} .h2.sm{font-size:40px}
+  .shot{margin-top:56px;width:1200px;height:691px;aspect-ratio:auto}
+  .shot .note{font-size:24px}
+  .rule.r1{margin-top:104px}
+  .results{margin-top:55px;height:918px;padding-block:48px 0}
+  .results .row{height:394px;flex-wrap:nowrap;gap:0}
+  .results .copy{width:474px}
+  .results .desk{flex:none;width:588px;height:394px}
+  .metrics{margin-top:56px;grid-template-columns:repeat(4,282px);gap:24px}
+  .metric{height:364px}
+  .industries{margin-top:104px;height:531px}
+  .industries .ind-grid{flex-wrap:nowrap;gap:237px;height:531px}
+  .industries .left{flex:none;width:427px;gap:80px}
+  .jobwrap{flex:none;width:536px;min-height:420px}
+  .core{margin-top:107px;height:936px}
+  .core .stage{width:1440px;height:934px;margin-left:calc(50% - 720px);padding:0}
+  .core .head{position:absolute;left:480px;top:120px;width:480px;margin:0}
+  .mods{margin:0;display:block}
+  .mod{position:absolute;left:var(--x);top:var(--y);width:221px;height:200px}
+  .photo-card{position:absolute;left:570px;top:322px;width:300px;height:424px}
+  .closing{margin-top:158px;height:219px}
+  footer{margin-top:160px;height:565px;padding:120px 0 32px;border-radius:56px 56px 0 0}
+  footer .cols{flex-wrap:nowrap;gap:0}
+  footer .about,footer .links3{flex:0 0 600px}
+  footer .links3{flex-wrap:nowrap}
+  footer .links3 div{width:200px;flex:none}
+  footer .big{position:absolute;left:calc(50% - 605px);top:297px;width:1200px;margin:0}
+  footer .big svg{width:1200px;height:340px;margin:0}
+}
+
