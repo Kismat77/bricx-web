@@ -1,0 +1,7 @@
+services:
+  bricx-web:
+    build: .
+    container_name: bricx-web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
