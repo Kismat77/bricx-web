@@ -28,7 +28,7 @@ export type RevealVariant =
 
 type OwnProps<T extends ElementType> = {
   as?: T;
-  /** Omit for no scroll-in (e.g. a magnetic button that is always visible). */
+  /** Omit for no scroll-in (e.g. a button its parent reveals). */
   variant?: RevealVariant;
   /** Seconds before this element starts (stagger). */
   delay?: number;

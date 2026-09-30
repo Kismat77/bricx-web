@@ -11,36 +11,31 @@ import { core, type CoreModule } from "@/content/home";
 /** Cards land outward from the centre photo. */
 const radialDelay = (x: number) => 0.12 + Math.abs(x + 110 - 720) / 1600;
 
+/**
+ * A module card. On hover / focus it takes Figma's Hover variant: green glass, navy icon chip, name moves up under the
+ * icon and the description opens at the bottom. The two spacers trade flex-grow so the move animates (styles: .mod).
+ */
 function ModuleCard({ m }: { m: CoreModule }) {
   const Icon = moduleIcons[m.icon];
-  const icon = (
-    <span className="ic">
-      <Icon />
-    </span>
-  );
   return (
     <Reveal
-      className={`mod${m.active ? "active" : ""}`}
+      className="mod"
       variant="card"
       delay={Number(radialDelay(m.x).toFixed(2))}
       tilt={7}
       shine="loop"
+      tabIndex={0}
       style={{ "--x": `${m.x}px`, "--y": `${m.y}px` } as CSSProperties}
     >
-      {m.active ? (
-        <>
-          <div className="top">
-            {icon}
-            <p className="name">{m.name}</p>
-          </div>
-          <p className="desc">{m.desc}</p>
-        </>
-      ) : (
-        <>
-          {icon}
-          <p className="name">{m.name}</p>
-        </>
-      )}
+      <span className="ic">
+        <Icon />
+      </span>
+      <span className="sp1" aria-hidden="true" />
+      <p className="name">{m.name}</p>
+      <span className="sp2" aria-hidden="true" />
+      <div className="desc">
+        <p>{m.desc}</p>
+      </div>
     </Reveal>
   );
 }
@@ -64,7 +59,7 @@ export function Core() {
           <SplitText className="eyebrow" mode="char" text={core.eyebrow} />
           <SplitText as="h2" className="h2 sm" id="core-t" mode="line" gradient text={core.title} />
         </div>
-        <div className={`mods${loop ? "loop" : ""}`} ref={mods}>
+        <div className={`mods${loop ? " loop" : ""}`} ref={mods}>
           {left.map((m) => (
             <ModuleCard key={m.name} m={m} />
           ))}

@@ -29,6 +29,9 @@
 
 
 /* results */
+/* glass cards: Results metrics and Core modules share one recipe (tokens in app/globals.css).
+   backdrop-filter stays literal and unprefixed: the CSS build prefixes it, and a hand-written -webkit- twin makes it drop both. */
+.metric,.mod{border:1px solid var(--glass-border);background:var(--glass-fill);backdrop-filter:blur(20px) saturate(160%);box-shadow:var(--glass-edge),var(--glass-shadow)}
 .results{margin-top:80px;padding-block:48px 56px;background:linear-gradient(to top,rgba(43,224,128,.05),rgba(255,255,255,0) 123.65%)}
 .results .row{display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between}
 .results .copy{display:grid;gap:16px;max-width:474px;justify-items:start}
@@ -37,7 +40,7 @@
 .results .desk{position:relative;flex:1 1 360px;max-width:588px;aspect-ratio:588/394;border-radius:12px;overflow:hidden;background:#E9EEF0}
 .results .desk img{width:100%;height:100%;object-fit:cover}
 .metrics{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px}
-.metric{position:relative;height:300px;padding:32px;border-radius:12px;border:1px solid rgba(205,213,218,.95);background:rgba(249,250,251,.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 24px rgba(0,0,0,.08);overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.metric{position:relative;height:300px;padding:32px;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
 .metric .value{font-weight:700;font-size:49px;line-height:1.2;white-space:nowrap;font-variant-numeric:tabular-nums}
 .metric .label{font-size:18px;line-height:1.6;color:var(--brand-ink)}
 .metric .sub{font-size:14px;line-height:1.6;color:var(--muted);margin-top:4px}
@@ -57,33 +60,32 @@
 .acc .panel > div{overflow:hidden}
 .acc .item.open .panel{grid-template-rows:1fr;margin-top:16px}
 .jobwrap{flex:1 1 380px;max-width:536px;min-height:420px;padding:24px;border-radius:16px;background:linear-gradient(140.1deg,#F0FDF8 0%,#E8F5F0 50%,#F5F9FF 100%);display:flex;flex-direction:column;justify-content:center;font-family:var(--ui)}
-.job{position:relative;border:1px solid rgba(255,255,255,.9);border-radius:24px;overflow:hidden;background:rgba(255,255,255,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 8px 40px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.8)}
-.job .top{padding:24px 24px 20px;border-bottom:1px solid rgba(0,0,0,.05)}
+/* live example card: one per industry (Figma "Industry Solutions" cards); body copy in Plex, figures in Inter */
+.job{position:relative;border:1px solid #fff;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.8)}
+.job .top{padding:24px 24px 20px;border-bottom:1px solid #F9FAFB}
 .job .row1{display:flex;justify-content:space-between;align-items:center}
 .job .proj{font-weight:600;font-size:12px;line-height:16px;color:#99A1AF}
 .live{display:inline-flex;gap:6px;align-items:center;padding:4px 10px;border-radius:999px;background:rgba(61,214,140,.12);font-weight:700;font-size:10px;line-height:15px;letter-spacing:1px;color:#1AAA6E}
-.live i{width:6px;height:6px;border-radius:50%;background:#3DD68C;animation:pulse 1.8s ease-in-out infinite}
+.live i{width:6px;height:6px;border-radius:50%;background:#3DD68C;opacity:.6;animation:pulse 1.8s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.35}}
 .job .amt{padding-top:4px;font-weight:700;font-size:20px;line-height:28px;color:#101828}
-.job .meta{padding-top:2px;font-size:12px;line-height:16px;color:#99A1AF}
-.bar{height:6px;border-radius:999px;background:rgba(0,0,0,.06);overflow:hidden;margin-top:16px}
+.job .meta{padding-top:2px;font-family:var(--title);font-size:12px;line-height:1.6;color:#99A1AF}
+.bar{height:6px;border-radius:999px;background:var(--bg-muted);overflow:hidden;margin-top:16px}
 .bar b{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#3DD68C,#22D3B4)}
 .job .row2{display:flex;justify-content:space-between;padding-top:6px;font-size:10px;line-height:15px;color:#99A1AF}
 .job .row2 em{font-style:normal;font-weight:500;color:#1AAA6E}
 .job .lines{padding:16px 24px;display:grid;gap:16px}
-.line .k{display:flex;justify-content:space-between;font-size:12px;line-height:16px;color:#6A7282}
+.line .k{display:flex;justify-content:space-between;align-items:center;font-size:12px;line-height:16px;color:#6A7282}
+.line .k > span:first-child{font-family:var(--title);line-height:1.6}
 .line .k strong{font-weight:600;color:#1E2939}
 .line .k span span{color:#99A1AF}
-.line .t{height:4px;border-radius:999px;background:rgba(0,0,0,.06);margin-top:6px;overflow:hidden}
-.line .t b{display:block;height:100%;border-radius:999px;background:rgba(61,214,140,.6)}
-.job .foot{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;background:rgba(61,214,140,.06);border-top:1px solid rgba(61,214,140,.12);font-size:12px;line-height:16px}
+.line .t{height:4px;border-radius:999px;background:var(--bg-muted);margin-top:6px;overflow:hidden}
+.line .t b{display:block;height:100%;border-radius:999px;background:rgba(61,214,140,.55)}
+.job .foot{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;gap:16px;background:rgba(61,214,140,.04);border-top:1px solid rgba(61,214,140,.08);font-size:12px;line-height:16px}
 .job .foot .ok{display:inline-flex;gap:8px;align-items:center;font-weight:500;color:#1AAA6E}
-.job .foot .ok i{width:20px;height:20px;border-radius:50%;background:rgba(61,214,140,.2);display:grid;place-items:center}
-.job .foot .m{color:#99A1AF}
-.chips{display:flex;gap:12px;padding-top:16px}
-.chips span{padding:4px 10px;border-radius:999px;border:1px solid #E5E7EB;background:rgba(255,255,255,.6);font-size:12px;line-height:16px;color:#99A1AF}
-.bar b,.line .t b{transform-origin:left;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
-.jobwrap:not(.in) .bar b,.jobwrap:not(.in) .line .t b{transform:scaleX(.001)}
+.job .foot .ok i{flex:none;width:20px;height:20px;border-radius:50%;background:rgba(61,214,140,.1);display:grid;place-items:center}
+.job .foot .m{flex:none;font-family:var(--title);line-height:1.6;color:#99A1AF}
+.bar b,.line .t b{transform-origin:left}
 
 
 /* the core */
@@ -92,16 +94,29 @@
 .core .head{display:grid;gap:12px;justify-items:center;text-align:center;max-width:480px;margin-inline:auto}
 .mods{margin-top:48px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 @media (min-width:700px){.mods{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.mod{position:relative;min-height:190px;padding:24px;gap:12px;border-radius:12px;border:1px solid rgba(205,213,218,.95);background:rgba(249,250,251,.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 24px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:space-between;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease,transform .2s ease}
-.mod .ic{width:56px;height:56px;border-radius:8px;background:var(--bg-muted);display:grid;place-items:center;transition:background .2s ease}
-.mod .name{font-size:18px;line-height:1.2;color:var(--blue-950)}
-.mod .desc{display:none;font-size:14px;line-height:1.6;color:var(--blue-950)}
-.mod:hover,.mod.active{border-color:rgba(31,189,105,.95);background:linear-gradient(137.9deg,rgba(31,189,105,.28) 0%,rgba(31,189,105,.12) 36.77%,rgba(31,189,105,.2) 70.71%);box-shadow:0 10px 28px rgba(31,189,105,.14)}
-.mod.active{justify-content:space-between}
-.mod.active .top{display:grid;gap:12px}
-.mod.active .ic{width:40px;height:40px;background:var(--brand-ink)}
-.mod.active .name{font-weight:700}
-.mod.active .desc{display:block}
+.mod{position:relative;min-height:190px;padding:24px;gap:12px;border-radius:12px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease,transform .2s ease}
+/* hover / focus = Figma "Container" Hover variant. Everything that changes is animatable: the spacers trade flex-grow
+   (the name glides up under the icon), the description opens via grid rows, the green gradient fades in on ::before */
+.mod{--mod-t:.45s var(--btn-ease);justify-content:flex-start;gap:0;outline:none}
+.mod > :not(.shine){position:relative;z-index:1}
+.mod::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(137.9deg,rgba(31,189,105,.28) 0%,rgba(31,189,105,.12) 36.77%,rgba(31,189,105,.2) 70.71%);opacity:0;transition:opacity var(--mod-t);pointer-events:none}
+.mod .ic{flex:none;width:56px;height:56px;border-radius:8px;background:var(--bg-muted);display:grid;place-items:center;transition:width var(--mod-t),height var(--mod-t),background-color var(--mod-t)}
+.mod .ic svg{width:32px;height:32px;transition:width var(--mod-t),height var(--mod-t)}
+.mod .ic svg path{transition:stroke var(--mod-t),stroke-width var(--mod-t)}
+.mod .sp1{flex:1 0 12px;transition:flex-grow var(--mod-t)}
+.mod .sp2{flex:0 0 0px;transition:flex-grow var(--mod-t)}
+.mod .name{flex:none;font-size:18px;line-height:1.2;color:var(--blue-950);transition:font-weight var(--mod-t)}
+.mod .desc{flex:none;display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows var(--mod-t),opacity var(--mod-t)}
+.mod .desc > p{overflow:hidden;font-size:14px;line-height:1.6;color:var(--blue-950)}
+.mod:hover,.mod:focus-visible{border-color:rgba(31,189,105,.95);box-shadow:var(--glass-edge),0 10px 28px rgba(31,189,105,.14)}
+.mod:hover::before,.mod:focus-visible::before{opacity:1}
+.mod:hover .ic,.mod:focus-visible .ic{width:40px;height:40px;background-color:var(--brand-ink)}
+.mod:hover .ic svg,.mod:focus-visible .ic svg{width:24px;height:24px}
+.mod:hover .ic svg path,.mod:focus-visible .ic svg path{stroke:var(--brand);stroke-width:2}   /* 2 in the 32-unit icon = Figma's 1.5px at 24px */
+.mod:hover .sp1,.mod:focus-visible .sp1{flex-grow:0}
+.mod:hover .sp2,.mod:focus-visible .sp2{flex-grow:1}
+.mod:hover .name,.mod:focus-visible .name{font-weight:700}
+.mod:hover .desc,.mod:focus-visible .desc{grid-template-rows:1fr;opacity:1}
 .photo-card{position:relative;grid-column:1/-1;justify-self:center;width:min(300px,100%);aspect-ratio:300/424;border-radius:16px;overflow:hidden;padding:24px;display:flex;align-items:flex-end;background:#6B7B72}
 .photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .photo-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.28) 24.865%,rgba(255,255,255,0) 43.4%)}
@@ -112,13 +127,13 @@
 
 
 /* closing cta */
-.closing{margin-top:120px;display:grid;gap:16px;justify-items:center;text-align:center}
+.closing{min-height:100vh;min-height:100svh;display:grid;gap:16px;justify-items:center;align-content:center;text-align:center}   /* a full-screen band: the rope sweeps out right and back in from the left around it */
 .closing .kick{font-weight:700;font-size:18px;line-height:1.6;color:var(--green-600)}
 .closing .h2{max-width:836px}
 
 
 /* footer */
-footer{position:relative;z-index:2;margin-top:120px;background:#000;color:#fff;border-radius:40px 40px 0 0;overflow:hidden;padding:72px 0 0}
+footer{position:relative;z-index:2;background:#000;color:#fff;border-radius:40px 40px 0 0;overflow:hidden;padding:72px 0 0}
 footer .cols{display:flex;flex-wrap:wrap;gap:40px;font-family:var(--ui)}
 footer .about{flex:1 1 300px;display:grid;gap:4px;align-content:start;font-size:12px;line-height:16px}
 footer .about p:first-child{line-height:19.5px;max-width:339px;margin-bottom:12px}

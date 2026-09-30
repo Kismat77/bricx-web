@@ -41,7 +41,7 @@ export function CountUp({
         done.current = true;
         const t0 = performance.now();
         const step = (now: number) => {
-          const u = Math.min(1, (now - t0) / duration),
+          const u = Math.min(1, Math.max(0, (now - t0) / duration)), // rAF's frame time can predate t0
             e = 1 - Math.pow(1 - u, 4);
           setText(p.pre + (p.to * e).toFixed(p.dec) + p.suf);
           if (u < 1) raf = requestAnimationFrame(step);

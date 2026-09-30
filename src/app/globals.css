@@ -31,10 +31,16 @@
   --mono: var(--font-plex-mono), ui-monospace, monospace;
   --ui: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --btn: var(--font-geist), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* glass cards (Results metrics + Core modules share one recipe) */
+  --glass-fill: linear-gradient(160deg, rgba(255, 255, 255, 0.72) 0%, rgba(249, 250, 251, 0.38) 100%);
+  --glass-border: rgba(205, 213, 218, 0.7);
+  --glass-edge: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  --glass-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   /* motion */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --out: cubic-bezier(0.16, 1, 0.3, 1);
+  --btn-ease: cubic-bezier(0.22, 1, 0.36, 1); /* button widen: a critically damped spring, no overshoot */
   color-scheme: light;
 }
 
